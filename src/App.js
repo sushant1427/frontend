@@ -9,8 +9,11 @@ function App() {
   const sendMessage = async (question) => {
     setMessages((prev) => [...prev, { sender: "user", text: question }]);
     try {
-      const res = await axios.post("http://127.0.0.1:8000/ask_question/",
-        new URLSearchParams({ question })
+      const res = await axios.post(
+  `${process.env.REACT_APP_BACKEND_URL}/ask_question/`,
+  new URLSearchParams({ question })
+);
+
       );
       setMessages((prev) => [...prev, { sender: "bot", text: res.data.answer }]);
     } catch (err) {
